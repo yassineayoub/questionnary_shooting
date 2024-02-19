@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 
 const questionsList = [
   {
@@ -24,16 +24,55 @@ const questionsList = [
 
 export default function Home() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [checkedAnswers, setCheckedAnswers] = useState([]);
+  const [validatedAnswers, setValidatedAnswers] = useState([]);
+  const [currentAnswers, setCurrentAnswers] = useState([]);
+  const prevButton = useRef('prev')
+  const nextButton = useRef('next')
 
+
+
+  const removeCheckedFromList = (array, itemToRemove) => {
+    return array.filter(value => value !== itemToRemove)
+  }
   const handleChange = (e) => {
-    if (e.target.checked) console.log(e.target.value)
-    else console.log(e.target.value + ' inchecked')
-
+    e.target.checked ? setCheckedAnswers([...checkedAnswers, e.target.value]) : setCheckedAnswers(removeCheckedFromList(checkedAnswers, e.target.value))
+    console.log(checkedAnswers)
   }
   const handleSubmit = (e) => {
     e.preventDefault();
 
   };
+
+  const handleButton = (e, val) => {
+    if (val === 'next' && currentQuestionIndex < questionsList.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1)
+      // insert checked Answers in Validated answers array at correct index
+      let arrayToPush = validatedAnswers;
+
+      if (validatedAnswers.length <= 0) {
+        console.log('<=0')
+        setValidatedAnswers([checkedAnswers])
+
+      } else {
+        console.log('sup',currentQuestionIndex)
+        arrayToPush[currentQuestionIndex] = checkedAnswers
+        setValidatedAnswers(arrayToPush)
+      }
+      setCheckedAnswers([]);
+    }
+
+    if (val === 'prev' && currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1)
+      // if going Prev, fullfill the checked answers from validated answers
+      setCheckedAnswers(validatedAnswers[currentQuestionIndex - 1])
+
+    }
+
+  }
+useEffect(() => {
+  console.log('validatedAnswers', validatedAnswers)
+}, [currentQuestionIndex, checkedAnswers, validatedAnswers])
 
   return (
     <main className="flex min-h-screen flex-col items-center  p-24">
@@ -61,6 +100,7 @@ export default function Home() {
                     id={answer}
                     name={answer}
                     value={answer}
+                    checked={(checkedAnswers.includes(answer))}
                     onChange={handleChange}
                   />
                   <label htmlFor={answer}>{answer}</label>
@@ -75,15 +115,17 @@ export default function Home() {
 
           <div className="flex justify-center w-full gap-5">
             <button
-              onClick={() => currentQuestionIndex > 0
-                ? setCurrentQuestionIndex(currentQuestionIndex - 1)
-                : ""}
+              type="button"
+              ref={prevButton}
+              onClick={(e) => handleButton(e, 'prev')}
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
               Previous
             </button>
             <button
-              onClick={() => currentQuestionIndex < questionsList.length - 1 ? setCurrentQuestionIndex(currentQuestionIndex + 1) : ''}
+              type="button"
+              ref={nextButton}
+              onClick={(e) => handleButton(e, 'next')}
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
               Next
