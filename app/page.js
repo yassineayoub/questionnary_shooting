@@ -26,11 +26,6 @@ export default function Home() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [checkedAnswers, setCheckedAnswers] = useState([]);
   const [validatedAnswers, setValidatedAnswers] = useState([]);
-  const [currentAnswers, setCurrentAnswers] = useState([]);
-  const prevButton = useRef('prev')
-  const nextButton = useRef('next')
-
-
 
   const removeCheckedFromList = (array, itemToRemove) => {
     return array.filter(value => value !== itemToRemove)
@@ -55,7 +50,7 @@ export default function Home() {
         setValidatedAnswers([checkedAnswers])
 
       } else {
-        console.log('sup',currentQuestionIndex)
+        console.log('sup', currentQuestionIndex)
         arrayToPush[currentQuestionIndex] = checkedAnswers
         setValidatedAnswers(arrayToPush)
       }
@@ -70,9 +65,11 @@ export default function Home() {
     }
 
   }
-useEffect(() => {
-  console.log('validatedAnswers', validatedAnswers)
-}, [currentQuestionIndex, checkedAnswers, validatedAnswers])
+  useEffect(() => {
+    let arr = validatedAnswers;
+    arr[currentQuestionIndex] = checkedAnswers
+    setValidatedAnswers(arr)
+  }, [checkedAnswers, currentQuestionIndex])
 
   return (
     <main className="flex min-h-screen flex-col items-center  p-24">
@@ -87,6 +84,7 @@ useEffect(() => {
           Please fill out the following questionnaire to the best of your
           ability.
         </p>
+        <p>Question {currentQuestionIndex + 1} / {questionsList.length}</p>
       </div>
       <form className="flex flex-col w-full gap-5" onSubmit={handleSubmit}>
         <div className="">
@@ -100,33 +98,27 @@ useEffect(() => {
                     id={answer}
                     name={answer}
                     value={answer}
-                    checked={(checkedAnswers.includes(answer))}
+                    checked={ checkedAnswers.includes(answer) || validatedAnswers[currentQuestionIndex]?.includes(answer)}
                     onChange={handleChange}
                   />
                   <label htmlFor={answer}>{answer}</label>
                 </div>
               ))}
-
-
-
-
             </fieldset>
           </div>
 
           <div className="flex justify-center w-full gap-5">
             <button
               type="button"
-              ref={prevButton}
               onClick={(e) => handleButton(e, 'prev')}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
             >
               Previous
             </button>
             <button
               type="button"
-              ref={nextButton}
               onClick={(e) => handleButton(e, 'next')}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
             >
               Next
             </button>
