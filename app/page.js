@@ -29,25 +29,36 @@ export default function Home() {
   const removeCheckedFromList = (array, itemToRemove) => {
     return array.filter((value) => value !== itemToRemove);
   };
+
+
   const handleClickNext = () => {
+    if (currentQuestionIndex === questionsList.length - 1) return;
     setCurrentQuestionIndex(currentQuestionIndex + 1);
+    // on next click, erase the checked answers
+    setCheckedAnswers([]);
+    // for the last question : if there are checked answers, insert them in validated answers
+    if (validatedAnswers[currentQuestionIndex + 1] && validatedAnswers[currentQuestionIndex + 1].length > 0) {
+      setCheckedAnswers(validatedAnswers[currentQuestionIndex + 1]);
+    }
   };
 
   const handleClickPrev = () => {
+    if (currentQuestionIndex === 0) return;
     setCurrentQuestionIndex(currentQuestionIndex - 1);
+    // on prev click, fullfill the checked answers from validated answers
+    setCheckedAnswers(validatedAnswers[currentQuestionIndex - 1]);
+
   };
 
   const handleChangeCheckbox = (e) => {
-    console.log("value change");
     let isChecked = e.target.checked;
     let value = e.target.value;
     let arrayToPush = [...validatedAnswers];
     arrayToPush[currentQuestionIndex] = [...checkedAnswers, value];
-  
     if (isChecked) {
       setCheckedAnswers([...checkedAnswers, value]);
       setValidatedAnswers(validatedAnswers[currentQuestionIndex] = arrayToPush);
-     
+
     } else {
       setCheckedAnswers(removeCheckedFromList(checkedAnswers, value));
       arrayToPush[currentQuestionIndex] = removeCheckedFromList(validatedAnswers[currentQuestionIndex], value);
@@ -58,31 +69,9 @@ export default function Home() {
     e.preventDefault();
   };
 
-  // const handleButton = (e, val) => {
-  //   if (val === "next") {
-  //     setCurrentQuestionIndex(currentQuestionIndex + 1);
-  //     // insert checked Answers in Validated answers array at correct index
-  //     let arrayToPush = validatedAnswers;
-
-  //     if (validatedAnswers.length <= 0) {
-  //       console.log("<=0");
-  //       setValidatedAnswers([checkedAnswers]);
-  //     } else {
-  //       console.log("sup", currentQuestionIndex);
-  //       arrayToPush[currentQuestionIndex] = checkedAnswers;
-  //       setValidatedAnswers(arrayToPush);
-  //     }
-  //     setCheckedAnswers([]);
-  //   }
-
-  //   if (val === "prev" && currentQuestionIndex > 0) {
-  //     setCurrentQuestionIndex(currentQuestionIndex - 1);
-  //     // if going Prev, fullfill the checked answers from validated answers
-  //     setCheckedAnswers(validatedAnswers[currentQuestionIndex - 1]);
-  //   }
-  // };
   useEffect(() => {
-    console.log(checkedAnswers,validatedAnswers, 'array to push')
+    console.log(checkedAnswers, validatedAnswers, 'array to push')
+    console.log(currentQuestionIndex, "currentQuestionIndex")
 
   }, [checkedAnswers, currentQuestionIndex, validatedAnswers]);
 
@@ -118,7 +107,8 @@ export default function Home() {
                       id={answer}
                       name={answer}
                       value={answer}
-                      checked={checkedAnswers.includes(answer)}
+                      defaultChecked={false}
+                      checked={validatedAnswers[currentQuestionIndex]?.includes(answer) ? true : false}
                       onChange={handleChangeCheckbox}
                     />
                     <label htmlFor={answer}>{answer}</label>
