@@ -24,7 +24,7 @@ export default function Home() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [checkedAnswers, setCheckedAnswers] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
-  const [validatedAnswers, setValidatedAnswers] = useState([]);
+  const [validatedAnswers, setValidatedAnswers] = useState([checkedAnswers]);
 
   const removeCheckedFromList = (array, itemToRemove) => {
     return array.filter((value) => value !== itemToRemove);
@@ -41,15 +41,17 @@ export default function Home() {
     console.log("value change");
     let isChecked = e.target.checked;
     let value = e.target.value;
-    let array = [checkedAnswers, value];
-    // console.log(array, "array");
-
-    if (!isChecked) {
-      setCheckedAnswers(removeCheckedFromList(checkedAnswers, value));
+    let arrayToPush = [...validatedAnswers];
+    arrayToPush[currentQuestionIndex] = [...checkedAnswers, value];
+  
+    if (isChecked) {
+      setCheckedAnswers([...checkedAnswers, value]);
+      setValidatedAnswers(validatedAnswers[currentQuestionIndex] = arrayToPush);
+     
     } else {
-      let arr = [];
-      arr[currentQuestionIndex] = [...checkedAnswers, value];
-      setCheckedAnswers(arr);
+      setCheckedAnswers(removeCheckedFromList(checkedAnswers, value));
+      arrayToPush[currentQuestionIndex] = removeCheckedFromList(validatedAnswers[currentQuestionIndex], value);
+      setValidatedAnswers(arrayToPush)
     }
   };
   const handleSubmit = (e) => {
@@ -80,8 +82,8 @@ export default function Home() {
   //   }
   // };
   useEffect(() => {
-    setValidatedAnswers(checkedAnswers);
-    console.log(validatedAnswers);
+    console.log(checkedAnswers,validatedAnswers, 'array to push')
+
   }, [checkedAnswers, currentQuestionIndex, validatedAnswers]);
 
   return (
