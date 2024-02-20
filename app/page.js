@@ -1,6 +1,8 @@
 "use client";
 
-import { use, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import Button from "./components/Button";
+import TestResult from "./components/TestResult";
 
 const questionsList = [
   {
@@ -24,6 +26,7 @@ export default function Home() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [checkedAnswers, setCheckedAnswers] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [validatedAnswers, setValidatedAnswers] = useState([checkedAnswers]);
 
   const removeCheckedFromList = (array, itemToRemove) => {
@@ -67,6 +70,7 @@ export default function Home() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSubmitted(true);
   };
 
   useEffect(() => {
@@ -107,7 +111,6 @@ export default function Home() {
                       id={answer}
                       name={answer}
                       value={answer}
-                      defaultChecked={false}
                       checked={validatedAnswers[currentQuestionIndex]?.includes(answer) ? true : false}
                       onChange={handleChangeCheckbox}
                     />
@@ -119,23 +122,17 @@ export default function Home() {
           </div>
 
           <div className="flex justify-center w-full gap-5">
-            <button
-              type="button"
-              onClick={handleClickPrev}
-              className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-            >
-              Previous
-            </button>
-            <button
-              type="button"
-              onClick={handleClickNext}
-              className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-            >
-              Next
-            </button>
+            <Button name='Précédent' color='cyan'  onClick={handleClickPrev} />
+
+            {currentQuestionIndex + 1 !== questionsList.length
+              ? <Button name='Suivant' color='cyan' onClick={handleClickNext} />
+              : <Button name='Terminer' color='red'  onClick={handleSubmit} />
+            }
           </div>
         </div>
       </form>
+
+      {isSubmitted && ( <TestResult questionsList={questionsList} finalAnswers={validatedAnswers} />)}
     </main>
   );
 }
