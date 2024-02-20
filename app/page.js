@@ -18,7 +18,7 @@ const questionsList = [
   {
     questionToAnswer: "What is your favorite animal?",
     answers: ["Dog", "Cat", "Elephant", "Lion"],
-    correctAnswers: ["Dog"],
+    correctAnswers: ["Dog","Elephant"],
   },
 ];
 

@@ -21,11 +21,13 @@ const TestResult = ({ questionsList, finalAnswers }) => {
     questionsList.forEach((question, index) => {
       let a = [];
       question.correctAnswers.forEach((q) => {
-        if (finalAnswers[index].includes(q)) {
-          a.push(true)
-        } 
-        if (finalAnswers[index].length === 0 || finalAnswers[index].length !== question.correctAnswers.length || !finalAnswers[index].includes(q)) {
-          a.push(false)
+        if (finalAnswers[index]) {
+          if (finalAnswers[index]?.includes(q)) {
+            a.push(true)
+          } 
+          if (finalAnswers[index]?.length === 0 || finalAnswers[index]?.length !== question.correctAnswers.length || !finalAnswers[index]?.includes(q)) {
+            a.push(false)
+          }
         }
       });
       acc.push(a);
