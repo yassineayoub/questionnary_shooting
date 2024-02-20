@@ -6,70 +6,83 @@ const questionsList = [
   {
     questionToAnswer: "What is your favorite color?",
     answers: ["Red", "Blue", "Green", "Yellow"],
-    correctAnswers: ["Red", "Green"]
+    correctAnswers: ["Red", "Green"],
   },
   {
     questionToAnswer: "What is your favorite food?",
     answers: ["Pizza", "Pasta", "Burger", "Fries"],
-    correctAnswers: ["Pizza"]
+    correctAnswers: ["Pizza"],
   },
   {
     questionToAnswer: "What is your favorite animal?",
     answers: ["Dog", "Cat", "Elephant", "Lion"],
-    correctAnswers: ["Dog"]
+    correctAnswers: ["Dog"],
   },
 ];
-
-
 
 export default function Home() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [checkedAnswers, setCheckedAnswers] = useState([]);
+  const [isChecked, setIsChecked] = useState(false);
   const [validatedAnswers, setValidatedAnswers] = useState([]);
 
   const removeCheckedFromList = (array, itemToRemove) => {
-    return array.filter(value => value !== itemToRemove)
-  }
-  const handleChange = (e) => {
-    e.target.checked ? setCheckedAnswers([...checkedAnswers, e.target.value]) : setCheckedAnswers(removeCheckedFromList(checkedAnswers, e.target.value))
-    console.log(checkedAnswers)
-  }
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+    return array.filter((value) => value !== itemToRemove);
+  };
+  const handleClickNext = () => {
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
   };
 
-  const handleButton = (e, val) => {
-    if (val === 'next' && currentQuestionIndex < questionsList.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1)
-      // insert checked Answers in Validated answers array at correct index
-      let arrayToPush = validatedAnswers;
+  const handleClickPrev = () => {
+    setCurrentQuestionIndex(currentQuestionIndex - 1);
+  };
 
-      if (validatedAnswers.length <= 0) {
-        console.log('<=0')
-        setValidatedAnswers([checkedAnswers])
+  const handleChangeCheckbox = (e) => {
+    console.log("value change");
+    let isChecked = e.target.checked;
+    let value = e.target.value;
+    let array = [checkedAnswers, value];
+    // console.log(array, "array");
 
-      } else {
-        console.log('sup', currentQuestionIndex)
-        arrayToPush[currentQuestionIndex] = checkedAnswers
-        setValidatedAnswers(arrayToPush)
-      }
-      setCheckedAnswers([]);
+    if (!isChecked) {
+      setCheckedAnswers(removeCheckedFromList(checkedAnswers, value));
+    } else {
+      let arr = [];
+      arr[currentQuestionIndex] = [...checkedAnswers, value];
+      setCheckedAnswers(arr);
     }
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
-    if (val === 'prev' && currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(currentQuestionIndex - 1)
-      // if going Prev, fullfill the checked answers from validated answers
-      setCheckedAnswers(validatedAnswers[currentQuestionIndex - 1])
+  // const handleButton = (e, val) => {
+  //   if (val === "next") {
+  //     setCurrentQuestionIndex(currentQuestionIndex + 1);
+  //     // insert checked Answers in Validated answers array at correct index
+  //     let arrayToPush = validatedAnswers;
 
-    }
+  //     if (validatedAnswers.length <= 0) {
+  //       console.log("<=0");
+  //       setValidatedAnswers([checkedAnswers]);
+  //     } else {
+  //       console.log("sup", currentQuestionIndex);
+  //       arrayToPush[currentQuestionIndex] = checkedAnswers;
+  //       setValidatedAnswers(arrayToPush);
+  //     }
+  //     setCheckedAnswers([]);
+  //   }
 
-  }
+  //   if (val === "prev" && currentQuestionIndex > 0) {
+  //     setCurrentQuestionIndex(currentQuestionIndex - 1);
+  //     // if going Prev, fullfill the checked answers from validated answers
+  //     setCheckedAnswers(validatedAnswers[currentQuestionIndex - 1]);
+  //   }
+  // };
   useEffect(() => {
-    let arr = validatedAnswers;
-    arr[currentQuestionIndex] = checkedAnswers
-    setValidatedAnswers(arr)
-  }, [checkedAnswers, currentQuestionIndex])
+    setValidatedAnswers(checkedAnswers);
+    console.log(validatedAnswers);
+  }, [checkedAnswers, currentQuestionIndex, validatedAnswers]);
 
   return (
     <main className="flex min-h-screen flex-col items-center  p-24">
@@ -84,40 +97,46 @@ export default function Home() {
           Please fill out the following questionnaire to the best of your
           ability.
         </p>
-        <p>Question {currentQuestionIndex + 1} / {questionsList.length}</p>
+        <p>
+          Question {currentQuestionIndex + 1} / {questionsList.length}
+        </p>
       </div>
       <form className="flex flex-col w-full gap-5" onSubmit={handleSubmit}>
         <div className="">
           <div className="mb-5">
             <fieldset>
-              <legend>{questionsList[currentQuestionIndex].questionToAnswer}</legend>
-              {questionsList[currentQuestionIndex].answers.map((answer, index) => (
-                <div key={index}>
-                  <input
-                    type="checkbox"
-                    id={answer}
-                    name={answer}
-                    value={answer}
-                    checked={ checkedAnswers.includes(answer) || validatedAnswers[currentQuestionIndex]?.includes(answer)}
-                    onChange={handleChange}
-                  />
-                  <label htmlFor={answer}>{answer}</label>
-                </div>
-              ))}
+              <legend>
+                {questionsList[currentQuestionIndex].questionToAnswer}
+              </legend>
+              {questionsList[currentQuestionIndex].answers.map(
+                (answer, index) => (
+                  <div key={index}>
+                    <input
+                      type="checkbox"
+                      id={answer}
+                      name={answer}
+                      value={answer}
+                      checked={checkedAnswers.includes(answer)}
+                      onChange={handleChangeCheckbox}
+                    />
+                    <label htmlFor={answer}>{answer}</label>
+                  </div>
+                )
+              )}
             </fieldset>
           </div>
 
           <div className="flex justify-center w-full gap-5">
             <button
               type="button"
-              onClick={(e) => handleButton(e, 'prev')}
+              onClick={handleClickPrev}
               className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
             >
               Previous
             </button>
             <button
               type="button"
-              onClick={(e) => handleButton(e, 'next')}
+              onClick={handleClickNext}
               className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
             >
               Next
@@ -128,5 +147,3 @@ export default function Home() {
     </main>
   );
 }
-
-
