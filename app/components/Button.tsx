@@ -20,6 +20,7 @@ const colors = {
 
   }
 }
+
 const Button = ({ onClick, name, color = 'red' || 'cyan' || 'blue' }) => {
   const colorClass = colors[color].className
   return (

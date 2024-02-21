@@ -1,0 +1,167 @@
+[{
+  "question": "Comment doit-on transporter une arme lors du déplacement entre son domicile et le stand de tir ?",
+  "options": [
+    "Désapprovisionnée",
+    "Dans un holster",
+    "Soit démontée",
+    "Sur soi",
+    "Dans une mallette ou une housse",
+    "Chargée",
+    "Soit munie d’un dispositif rendant son utilisation immédiate impossible"
+  ],
+  "correct": [0, 2, 4, 6]
+}, {
+  "question": "Les munitions peuvent-elles être transportées dans la même mallette que l’arme ?",
+  "options": [
+    "Oui",
+    "Non, mais dans une mallette à part"
+  ],
+  "correct": [1]
+}, {
+  "question": "Arrivé au stand le tireur :",
+  "options": [
+    "Sort l’arme de la mallette et l’apporte au pas de tir",
+    "Apporte la mallette au pas de tir avant de sortir l’arme"
+  ],
+  "correct": [1]
+
+}, {
+  "question": "Comment met-on son arme en sécurité ?",
+  "options": [
+    "En démontant la culasse ou le barillet",
+    "En ôtant le chargeur et les munitions",
+    "En ouvrant la culasse ou en basculant le barillet vidé",
+    "En contrôlant visuellement et physiquement l’absence de munitions",
+    "En mettant dans la chambre un drapeau de sécurité"
+  ],
+  "correct": [1, 2, 3, 4]
+}, {
+  "question": "Qu’appelle-t-on une arme approvisionnée ?",
+  "options": [
+    "Une arme qui contient des munitions",
+    "Une arme qui a la culasse fermée",
+    "Une arme qui a le chien armé"
+  ],
+  "correct": [0]
+}, {
+  "question": "Qu’appelle-t-on une arme prête à tirer ?",
+  "options": [
+    "Une arme approvisionnée",
+    "Une arme dont la culasse est fermée",
+    "Une arme dont toute action sur la queue de détente fait partir le coup"
+  ],
+  "correct": [2]
+}, {
+  "question": "A priori, une arme doit-elle être considérée comme chargée ?",
+  "options": [
+    "Oui",
+    "Non"
+  ],
+  "correct": [0]
+}, {
+  "question": "Est-il possible pour un tireur de diriger son arme vers quelqu’un ?",
+  "options": [
+    "Oui",
+    "Non"
+  ],
+  "correct": [1]
+}, {
+  "question": "Un tireur est-il autorisé à faire des simulacres de visée avec une arme, même vide ?",
+  "options": [
+    "Vers quelqu’un",
+    "Dans un endroit prévu à cet effet",
+    "En direction du pas de tir ou des cibles, lorsqu’il n’y a personne",
+    "En dehors des stands"
+  ],
+  "correct": [1, 2]
+}, {
+  "question": "Un tireur arrête un instant de tirer, pour se reposer assis en arrière du pas de tir, l‘arme étant chargée, que doit-il faire ?",
+  "options": [
+    "Mettre son arme en sécurité",
+    "Démonter l’arme",
+    "Laisser l’arme chargée sur la table de tir"
+  ],
+  "correct": [0]
+}, {
+  "question": "Pendant que d’autres tireurs sont aux cibles, qu’a le droit de faire un tireur resté au pas de tir ?",
+  "options": [
+    "Régler son arme",
+    "Laisser le chargeur engagé",
+    "Manipuler son arme",
+    "Ne pas toucher à son arme"
+  ],
+  "correct": [3]
+}, {
+  "question": "Le port de lunettes est-il ?",
+  "options": [
+    "Obligatoire dans toutes les disciplines",
+    "Recommandé dans toutes les disciplines",
+    "Obligatoire dans certaines disciplines"
+  ],
+  "correct": [1, 2]
+}, {
+  "question": "Lorsque l’arme chargée a un incident, un tireur peut-il ?",
+  "options": [
+    "Faire appel à un responsable du club sans quitter le poste de tir",
+    "Réparer dans le stand en arrière du pas de tir",
+    "Mettre l’arme en sécurité",
+    "Réparer au pas de tir, le canon de l’arme face aux cibles ou la butte de tir"
+  ],
+  "correct": [0, 2, 3]
+}, {
+  "question": "Un tireur possède une arme soumise à autorisation de détention. Comment doit-il la stocker à son domicile ?",
+  "options": [
+    "L’entreposer dans un coffre-fort ou une armoire forte ou une pièce forte",
+    "La ranger assurée dans une mallette fermée à clef",
+    "Stocker les munitions de l’arme soumise à autorisation dans le même coffre-fort, armoire forte ou pièce forte."
+  ],
+  "correct": [0, 2]
+}, {
+  "question": "Un tireur possède une arme soumise à déclaration ou enregistrement, comment doit-il la stocker à son domicile ? (3 possibilités)",
+  "options": [
+    "La ranger assurée dans une mallette fermant à clé",
+    "L’entreposer dans un coffre-fort ou une armoire forte",
+    "Démonter une pièce essentielle de l’arme la rendant inutilisable",
+    "Utiliser un dispositif empêchant l’enlèvement de l’arme"
+  ],
+  "correct": [1, 2, 3]
+}, {
+  "question": "En quoi consiste l’action du lâcher ?",
+  "options": [
+    "Appuyer sur la queue de détente",
+    "Poser son arme sur la table de tir"
+  ],
+  "correct": [0]
+}, {
+  "question": "Quelles sont les conséquences d’un mauvais lâcher ?",
+  "options": [
+    "Enrayer l’arme",
+    "Déstabilisation de l’arme",
+    "Ne pas atteindre le point visé"
+  ],
+
+  "correct": [1, 2]
+}, {
+  "question": "Quels éléments faut-il aligner pour réaliser une visée correcte ?",
+  "options": [
+    "Le guidon",
+    "L’œil",
+    "Le cran de mire",
+    "La cible"
+  ],
+  "correct": [0, 1, 2, 3]
+}, {
+  "question": "Faute pour l’œil de voir net simultanément à différentes distances, quel(s) élément(s) faut-il voir de façon nette ?",
+  "options": [
+    "Le visuel de la cible",
+    "La ligne de mire"
+  ],
+  "correct": [1]
+}, {
+  "question": "Pour tirer plus à droite, dans quelle direction faut-il déplacer la hausse ?",
+  "options": [
+    "A droite",
+    "A gauche"
+  ],
+  "correct": [0]
+}]

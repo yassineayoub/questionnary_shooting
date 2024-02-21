@@ -5,12 +5,17 @@ Display the result of the test
 */
 import React, { use, useEffect, useState } from 'react'
 import Alert from './Alert'
+import Button from "./Button";
 
-const TestResult = ({ questionsList, finalAnswers }) => {
+const TestResult = ({ questionsList, finalAnswers, correctAnswers }) => {
   const [verifyAnswers, setVerifiedAnswers] = useState([])
   const [score, setScore] = useState(0)
   const totalQuestions = questionsList.length;
-  // verify if in finalAnswers, the answer is true or false regarding the question correct answer
+
+  const handleRetry = () => {
+    window.location.reload()
+  }
+
   useEffect(() => {
     let acc = []
     questionsList.forEach((question, index) => {
@@ -19,11 +24,11 @@ const TestResult = ({ questionsList, finalAnswers }) => {
       a.missing = [];
       a.false = [];
       finalAnswers[index].filter((answer) => {
-        if (!question.correctAnswers.includes(answer)) {
+        if (!correctAnswers[index].includes(answer)) {
           a.false = [...a.false, answer]
         }
       })
-      question.correctAnswers.forEach((q) => {
+      correctAnswers[index].forEach((q) => {
         if (finalAnswers[index]) {
           if (finalAnswers[index]?.includes(q)) {
             a.correct = [...a.correct, q];
@@ -37,6 +42,7 @@ const TestResult = ({ questionsList, finalAnswers }) => {
     })
     setVerifiedAnswers(acc)
   }, [finalAnswers, questionsList])
+  
   useEffect(() => {
     let score = 0;
     verifyAnswers.forEach((question) => {
@@ -67,26 +73,13 @@ const TestResult = ({ questionsList, finalAnswers }) => {
       <div className="w-full max-w-lg">
         {questionsList.map((question, index) => (
           <div key={index} className="bg-white rounded-lg shadow-md mb-5 p-6">
-            <h3 className="text-xl font-bold mb-2 text-gray-800">Question n° {index + 1} : {question.questionToAnswer}</h3>
-            <p className="">{verifyAnswers.length > 0 && messageToDisplay(verifyAnswers[index])}</p>
+            <h3 className="text-xl font-bold mb-2 text-gray-800 ">Question n° {index + 1} : <span>{question.question}</span> </h3>
+            {verifyAnswers.length > 0 && messageToDisplay(verifyAnswers[index])}
           </div>
         ))}
       </div>
+      <Button name="Reessayer" color='blue' onClick={handleRetry} />
     </div>
-    // <div className="flex flex-col items-center justify-center">
-    //   <h1 className="text-4xl font-bold text-center mb-5">Score : {score} / {totalQuestions}</h1>
-    //   <div className="flex flex-col  justify-center">
-    //     {questionsList.map((question, index) => {
-    //       return (
-    //         <div key={index} className="mb-5">
-
-    //           <h3 className="text-xl font-bold mb-2">Question n° {index + 1} : {question.questionToAnswer}</h3>
-    //           <span>{verifyAnswers.length > 0 && messageToDisplay(verifyAnswers[index])}</span>
-    //         </div>
-    //       )
-    //     })}
-    //   </div>
-    // </div>
   )
 }
 
