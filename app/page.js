@@ -18,7 +18,7 @@ const questionsList = [
   {
     questionToAnswer: "What is your favorite animal?",
     answers: ["Dog", "Cat", "Elephant", "Lion"],
-    correctAnswers: ["Dog","Elephant"],
+    correctAnswers: ["Dog", "Elephant"],
   },
 ];
 
@@ -80,59 +80,55 @@ export default function Home() {
   }, [checkedAnswers, currentQuestionIndex, validatedAnswers]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center  p-24">
-      <div className="z-10 max-w-5xl w-full items-center font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-400/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Questionnaire&nbsp;
-        </p>
+
+
+
+    <main className="flex flex-col items-center justify-center min-h-screen p-10 bg-gray-100">
+      <div className="mb-8 text-center">
+        <h1 className="text-4xl font-bold text-gray-800">Questionnaire</h1>
+        <p className="text-gray-600">Les questions sont à choix multiples. Vous pouvez cocher plusieurs réponses.</p>
       </div>
-      <div className="mb-5">
-        <h1 className="text-3xl font-bold">Questionnaire</h1>
-        <p className="text-gray-600">
-          Please fill out the following questionnaire to the best of your
-          ability.
-        </p>
-        <p>
+
+      <form className="w-full max-w-lg bg-white rounded-lg shadow-lg p-8" onSubmit={handleSubmit}>
+        <p className="text-gray-700 mb-4">
           Question {currentQuestionIndex + 1} / {questionsList.length}
         </p>
-      </div>
-      <form className="flex flex-col w-full gap-5" onSubmit={handleSubmit}>
-        <div className="">
-          <div className="mb-5">
-            <fieldset>
-              <legend>
-                {questionsList[currentQuestionIndex].questionToAnswer}
-              </legend>
-              {questionsList[currentQuestionIndex].answers.map(
-                (answer, index) => (
-                  <div key={index}>
-                    <input
-                      type="checkbox"
-                      id={answer}
-                      name={answer}
-                      value={answer}
-                      checked={validatedAnswers[currentQuestionIndex]?.includes(answer) ? true : false}
-                      onChange={handleChangeCheckbox}
-                    />
-                    <label htmlFor={answer}>{answer}</label>
-                  </div>
-                )
-              )}
-            </fieldset>
+
+        <div className="mb-6">
+          <fieldset>
+            <legend className="font-bold mb-4 text-gray-800">{questionsList[currentQuestionIndex].questionToAnswer}</legend>
+            {questionsList[currentQuestionIndex].answers.map((answer, index) => (
+              <div key={index} className="flex items-center mb-2">
+                <input
+                  type="checkbox"
+                  id={answer}
+                  className="mr-2"
+                  name={answer}
+                  value={answer}
+                  checked={validatedAnswers[currentQuestionIndex]?.includes(answer) ? true : false}
+                  onChange={handleChangeCheckbox}
+                />
+                <label htmlFor={answer} className="text-gray-800">{answer}</label>
+              </div>
+            ))}
+          </fieldset>
+        </div>
+        {currentQuestionIndex === 0
+          ? <div className="flex justify-end">
+            <Button name="Suivant" color="cyan" onClick={handleClickNext} />
           </div>
 
-          <div className="flex justify-center w-full gap-5">
-            <Button name='Précédent' color='cyan'  onClick={handleClickPrev} />
-
+          : <div className="flex justify-between">
+            <Button name="Précédent" color="cyan" onClick={handleClickPrev} />
             {currentQuestionIndex + 1 !== questionsList.length
-              ? <Button name='Suivant' color='cyan' onClick={handleClickNext} />
-              : <Button name='Terminer' color='red'  onClick={handleSubmit} />
+              ? <Button name="Suivant" color="cyan" onClick={handleClickNext} />
+              : <Button name="Terminer" color="red" onClick={handleSubmit} />
             }
           </div>
-        </div>
+        }
       </form>
 
-      {isSubmitted && ( <TestResult questionsList={questionsList} finalAnswers={validatedAnswers} />)}
+      {isSubmitted && <TestResult questionsList={questionsList} finalAnswers={validatedAnswers} />}
     </main>
   );
 }

@@ -1,9 +1,11 @@
+/*
+-------------
+Display the result of the test
+-------------
+*/
 import React, { use, useEffect, useState } from 'react'
 import Alert from './Alert'
-/*
 
-
-*/
 const TestResult = ({ questionsList, finalAnswers }) => {
   const [verifyAnswers, setVerifiedAnswers] = useState([])
   const [score, setScore] = useState(0)
@@ -60,20 +62,31 @@ const TestResult = ({ questionsList, finalAnswers }) => {
 
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold text-center mb-5">Score : {score} / {totalQuestions}</h1>
-      <div className="flex flex-col  justify-center">
-        {questionsList.map((question, index) => {
-          return (
-            <div key={index} className="mb-5">
-
-              <h3 className="text-xl font-bold mb-2">Question n° {index + 1} : {question.questionToAnswer}</h3>
-              <span>{verifyAnswers.length > 0 && messageToDisplay(verifyAnswers[index])}</span>
-            </div>
-          )
-        })}
+    <div className="flex flex-col items-center justify-center ">
+      <h1 className="text-4xl font-bold text-center mb-5 text-gray-800">Score : {score} / {totalQuestions}</h1>
+      <div className="w-full max-w-lg">
+        {questionsList.map((question, index) => (
+          <div key={index} className="bg-white rounded-lg shadow-md mb-5 p-6">
+            <h3 className="text-xl font-bold mb-2 text-gray-800">Question n° {index + 1} : {question.questionToAnswer}</h3>
+            <p className="">{verifyAnswers.length > 0 && messageToDisplay(verifyAnswers[index])}</p>
+          </div>
+        ))}
       </div>
     </div>
+    // <div className="flex flex-col items-center justify-center">
+    //   <h1 className="text-4xl font-bold text-center mb-5">Score : {score} / {totalQuestions}</h1>
+    //   <div className="flex flex-col  justify-center">
+    //     {questionsList.map((question, index) => {
+    //       return (
+    //         <div key={index} className="mb-5">
+
+    //           <h3 className="text-xl font-bold mb-2">Question n° {index + 1} : {question.questionToAnswer}</h3>
+    //           <span>{verifyAnswers.length > 0 && messageToDisplay(verifyAnswers[index])}</span>
+    //         </div>
+    //       )
+    //     })}
+    //   </div>
+    // </div>
   )
 }
 

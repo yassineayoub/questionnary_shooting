@@ -6,15 +6,15 @@ const alertStyle = {
     message: "Info alert! Change a few things up and try submitting again."
   },
   danger: {
-    className: "text-red-800   dark:text-red-400",
+    className: "text-red-600   dark:text-red-600",
     message: "Mauvaise réponse(s)"
   },
   success: {
-    className: "text-green-800   dark:text-green-400",
+    className: "text-green-600   dark:text-green-600",
     message: "Bonne réponse(s)"
   },
   warning: {
-    className: "text-yellow-800   dark:text-yellow-300",
+    className: "text-yellow-600   dark:text-red-600",
     message: "La réponse est  incomplète"
   },
 
@@ -27,7 +27,7 @@ const Alert = ({ type }) => {
   return (
 
     <div className={className} role="alert">
-      <span className="font-medium">{message}</span>
+      <span className="font-medium text">{message}</span>
     </div>
 
 
