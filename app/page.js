@@ -25,7 +25,6 @@ const questionsList = [
 export default function Home() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [checkedAnswers, setCheckedAnswers] = useState([]);
-  const [isChecked, setIsChecked] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [validatedAnswers, setValidatedAnswers] = useState([checkedAnswers]);
 
@@ -38,6 +37,7 @@ export default function Home() {
     if (currentQuestionIndex === questionsList.length - 1) return;
     setCurrentQuestionIndex(currentQuestionIndex + 1);
     // on next click, erase the checked answers
+    setValidatedAnswers([...validatedAnswers, checkedAnswers])
     setCheckedAnswers([]);
     // for the last question : if there are checked answers, insert them in validated answers
     if (validatedAnswers[currentQuestionIndex + 1] && validatedAnswers[currentQuestionIndex + 1].length > 0) {
