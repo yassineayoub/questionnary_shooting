@@ -76,7 +76,7 @@ export default function Home() {
               plusieurs bonnes réponses.</p>
           </div>
 
-          <form className="w-full max-w-lg bg-white rounded-lg shadow-lg p-8" onSubmit={handleSubmit}>
+          <form className="w-full max-w-lg m-auto bg-white rounded-lg shadow-lg p-8" onSubmit={handleSubmit}>
             <p className="text-gray-700 mb-4 ">
               Question {currentQuestionIndex + 1} / {questionsList.length}
             </p>
