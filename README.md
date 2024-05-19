@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Licence de Tir Sportif - Questionnaire
 
-## Getting Started
+Bienvenue dans l'application de questionnaire pour obtenir votre licence de tir sportif. Cette application a été conçue pour aider les utilisateurs à se préparer et à réussir l'examen nécessaire pour obtenir leur licence de tir.
 
-First, run the development server:
+## Fonctionnalités
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Questionnaire interactif** : Répondez à une série de questions couvrant les sujets de l'examen de licence de tir sportif.
+- **Suivi des résultats** : Suivez vos performances et identifiez les domaines à améliorer.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Prérequis
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Assurez-vous d'avoir installé les éléments suivants :
 
-## Learn More
+- [Node.js](https://nodejs.org/) (version 14 ou supérieure)
+- [npm](https://www.npmjs.com/)
 
-To learn more about Next.js, take a look at the following resources:
+### Étapes d'installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clonez ce dépôt sur votre machine locale :
+   ```bash
+   git clone https://github.com/yassineayoub/questionnary_shooting.git
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+2. Accédez au répertoire du projet :
+  ```bash
+  cd questionnnary_shooting
 
-## Deploy on Vercel
+3. Installez les dépendances nécessaires :
+  ```bash
+  npm install
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Lancez l'application sur le serveur local et accedez à http://localhost:3000 :
+  ```bash
+  npm run dev
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contact
+
+- Nom : AYOUB YASSINE
+- Email : [y.ayoubwd@gmail.com]
+- GitHub : https://github.com/yassineayoub
