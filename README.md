@@ -32,7 +32,7 @@ Assurez-vous d'avoir installé les éléments suivants :
 
 5. Lancez l'application sur le serveur local et accedez à http://localhost:3000 :
    ```bash
-  npm run dev
+   npm run dev
 
 ## Contact
 
