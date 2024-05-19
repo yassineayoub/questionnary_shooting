@@ -23,15 +23,15 @@ Assurez-vous d'avoir installé les éléments suivants :
    git clone https://github.com/yassineayoub/questionnary_shooting.git
 
 2. Accédez au répertoire du projet :
-  ```bash
-  cd questionnnary_shooting
+   ```bash
+   cd questionnnary_shooting
 
 3. Installez les dépendances nécessaires :
-  ```bash
-  npm install
+   ```bash
+   npm install
 
-4. Lancez l'application sur le serveur local et accedez à http://localhost:3000 :
-  ```bash
+5. Lancez l'application sur le serveur local et accedez à http://localhost:3000 :
+   ```bash
   npm run dev
 
 ## Contact
